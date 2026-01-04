@@ -3,98 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ASK Online Academy - Student Login</title>
+<title>ASK Online Academy</title>
 <style>
-    body { font-family: Arial, sans-serif; background: #f0f2f5; margin:0; padding:0;}
+    body { font-family: Arial, sans-serif; margin:0; padding:0; background: #f0f2f5;}
     header { background: #004aad; color: white; padding: 20px; text-align: center;}
-    .container { max-width: 500px; margin: 40px auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);}
-    input { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border:1px solid #ccc;}
-    button { width: 100%; padding: 10px; background: #004aad; color: white; border: none; border-radius: 5px; cursor: pointer;}
-    button:hover { background: #003080; }
-    .dashboard { text-align: center; }
-    a { color: #004aad; font-weight: bold; text-decoration: none;}
-    a:hover { text-decoration: underline;}
+    nav { text-align: center; margin: 20px;}
+    nav a { text-decoration: none; color: white; background: #004aad; padding: 10px 20px; border-radius: 5px; margin: 5px; display: inline-block;}
+    nav a:hover { background: #003080; }
+    .container { max-width: 800px; margin: 20px auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);}
 </style>
 </head>
 <body>
 
 <header>
-    <h1>ASK Online Academy</h1>
-    <p>Student Login</p>
+    <h1>Welcome to ASK Online Academy</h1>
 </header>
 
-<div class="container" id="loginContainer">
-    <h3>Login</h3>
-    <input type="text" id="studentName" placeholder="Enter your Name">
-    <input type="text" id="course" placeholder="Enter your Course">
-    <button onclick="loginStudent()">Login</button>
+<nav>
+    <a href="login.html">Student Login</a>
+    <a href="#">Courses</a>
+    <a href="#">About Us</a>
+    <a href="#">Contact</a>
+</nav>
+
+<div class="container">
+    <h2>About ASK Online Academy</h2>
+    <p>ASK Online Academy provides quality online education with Notes & Video Lectures for students. Students can login to access course materials after admission confirmation.</p>
+    
+    <h3>Courses Offered:</h3>
+    <ul>
+        <li>Biology</li>
+        <li>Statistics</li>
+        <li>English</li>
+    </ul>
+
+    <h3>How to Access Materials:</h3>
+    <p>After confirmation, students receive a Student ID and Password. Click on <strong>Student Login</strong> to access the dashboard.</p>
 </div>
-
-<div class="container" id="dashboardContainer" style="display:none;">
-    <div class="dashboard">
-        <h2>Welcome, <span id="displayName"></span>!</h2>
-        <p>Your Student ID: <span id="displayID"></span></p>
-        <p>Your Password: <span id="displayPassword"></span></p>
-        <h3>📘 Course Materials</h3>
-        <ul>
-            <li><a href="https://drive.google.com/drive/folders/EXAMPLE_NOTES_LINK" target="_blank">📄 Download Notes</a></li>
-            <li><a href="https://drive.google.com/drive/folders/EXAMPLE_VIDEOS_LINK" target="_blank">🎥 Watch Videos</a></li>
-        </ul>
-        <h3>WhatsApp Message</h3>
-        <textarea id="whatsappMsg" rows="5" style="width:100%; border:1px solid #ccc; border-radius:5px;"></textarea>
-        <button onclick="copyWhatsApp()">Copy WhatsApp Message</button>
-    </div>
-</div>
-
-<script>
-function generateID(name) {
-    let rand = Math.floor(Math.random()*900+100); // random 3-digit
-    return "ASK-2026-" + rand;
-}
-
-function generatePassword(name) {
-    return name.slice(0,3).toUpperCase() + "@123";
-}
-
-function loginStudent() {
-    let name = document.getElementById("studentName").value.trim();
-    let course = document.getElementById("course").value.trim();
-
-    if(name === "" || course === "") {
-        alert("Please enter both Name and Course!");
-        return;
-    }
-
-    let studentID = generateID(name);
-    let password = generatePassword(name);
-
-    document.getElementById("displayName").innerText = name;
-    document.getElementById("displayID").innerText = studentID;
-    document.getElementById("displayPassword").innerText = password;
-
-    // WhatsApp message
-    let msg = `Assalamualaikum ${name} 🌸\n\n` +
-              `🎉 Your admission to ASK Online Academy is CONFIRMED!\n\n` +
-              `🔹 Student ID: ${studentID}\n` +
-              `🔹 Password: ${password}\n\n` +
-              `🌐 Login here: www.youracademy.com/student-login\n` +
-              `📘 Course materials (Notes & Videos) are available on your dashboard.\n\n` +
-              `Welcome to ASK Online Academy! 🚀`;
-
-    document.getElementById("whatsappMsg").value = msg;
-
-    document.getElementById("loginContainer").style.display = "none";
-    document.getElementById("dashboardContainer").style.display = "block";
-}
-
-function copyWhatsApp() {
-    let copyText = document.getElementById("whatsappMsg");
-    copyText.select();
-    copyText.setSelectionRange(0, 99999);
-    navigator.clipboard.writeText(copyText.value);
-    alert("WhatsApp message copied! ✅");
-}
-</script>
 
 </body>
 </html>
