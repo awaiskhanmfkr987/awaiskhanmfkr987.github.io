@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard - ASK Online Academy</title>
+<title>Dashboard - ASkhan Online Academy</title>
 <style>
     body { font-family: Arial, sans-serif; background: #f0f2f5; margin:0; padding:0;}
     header { background: #004aad; color: white; padding: 20px; text-align: center;}
@@ -33,44 +33,4 @@
     </ul>
 
     <h3>WhatsApp Message</h3>
-    <textarea id="whatsappMsg" rows="5" readonly></textarea>
-    <button onclick="copyWhatsApp()">Copy WhatsApp Message</button>
-</div>
-
-<script>
-    // ======= Check if student is logged in =======
-    const studentData = JSON.parse(localStorage.getItem('studentData'));
-    if(!studentData){
-        alert('⚠️ Please login first!');
-        window.location.href = 'login.html';
-    }
-
-    // ======= Populate dashboard =======
-    document.getElementById('studentName').innerText = studentData.name;
-    document.getElementById('studentID').innerText = studentData.id;
-    document.getElementById('studentPassword').innerText = studentData.password;
-
-    document.getElementById('notesLink').href = studentData.notes || '#';
-    document.getElementById('videosLink').href = studentData.videos || '#';
-
-    const msg = `Assalamualaikum ${studentData.name} 🌸\n\n` +
-                `🎉 Your admission to ASK Online Academy is CONFIRMED!\n\n` +
-                `🔹 Student ID: ${studentData.id}\n` +
-                `🔹 Password: ${studentData.password}\n\n` +
-                `🌐 Login here: www.youracademy.com/login.html\n` +
-                `📘 Course materials (Notes & Videos) are available on your dashboard.\n\n` +
-                `Welcome to ASK Online Academy! 🚀`;
-
-    document.getElementById('whatsappMsg').value = msg;
-
-    function copyWhatsApp() {
-        const copyText = document.getElementById('whatsappMsg');
-        copyText.select();
-        copyText.setSelectionRange(0, 99999);
-        navigator.clipboard.writeText(copyText.value);
-        alert("WhatsApp message copied! ✅");
-    }
-</script>
-
-</body>
-</html>
+    <textarea id
