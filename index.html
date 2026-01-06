@@ -1,91 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ASkhan Online Academy</title>
+<title>Student Login</title>
 <style>
-  body {font-family: Arial, Helvetica, sans-serif; margin:0; background:#f4f6f8;}
-  header {background:#1e3c72; color:white; padding:40px 20px; text-align:center;}
-  nav {background:#2a5298; padding:12px; text-align:center;}
-  nav a {color:white; margin:0 15px; text-decoration:none; font-weight:bold;}
-  nav a:hover {text-decoration:underline;}
-  section {max-width:1100px; margin:auto; padding:50px 20px;}
-  .card-grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px;}
-  .card {background:white; padding:25px; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1);}
-  .card h3 {margin-top:0; color:#1e3c72;}
-  .btn {display:inline-block; background:#1e3c72; color:white; padding:12px 22px; border-radius:6px; text-decoration:none; margin-top:10px;}
-  .btn:hover {background:#16315f;}
-  footer {background:#222; color:white; text-align:center; padding:20px;}
+body{font-family:Arial;background:#f4f6f8}
+.box{max-width:400px;margin:100px auto;background:#fff;padding:30px;border-radius:10px}
+input,button{width:100%;padding:12px;margin:10px 0}
+button{background:#1e3c72;color:white;border:none}
 </style>
 </head>
 <body>
 
-<header>
-  <h1>ASkhan Online Academy</h1>
-  <p>Quality Online Education | Mathematics • Science • Statistics</p>
-</header>
+<div class="box">
+  <h2>Student Login</h2>
+  <input id="studentId" placeholder="Student ID">
+  <input id="username" placeholder="Student Name">
+  <input id="password" type="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+</div>
 
-<nav>
-  <a href="#about">About</a>
-  <a href="#courses">Courses</a>
-  <a href="#admission">Admission</a>
-  <a href="#fee">Fee & Scholarship</a>
-  <a href="login.html">Student Login</a>
-</nav>
+<script>
+let admittedStudents = [];
 
-<section id="about">
-  <h2>About the Academy</h2>
-  <p>
-    ASkhan Online Academy provides structured and result-oriented education for school and college students.
-    We focus on concept clarity, exam preparation, and modern digital learning tools.
-  </p>
-</section>
+fetch("PASTE_YOUR_EXEC_URL_HERE")
+  .then(res => res.json())
+  .then(data => admittedStudents = data)
+  .catch(() => alert("Connection failed"));
 
-<section id="courses">
-  <h2>Courses Offered</h2>
-  <div class="card-grid">
-    <div class="card">
-      <h3>📘 Mathematics</h3>
-      <p>Grade 6–12, O-Level & A-Level support</p>
-    </div>
-    <div class="card">
-      <h3>🔬 Science</h3>
-      <p>Physics, Chemistry & Biology (Grade 6–10)</p>
-    </div>
-    <div class="card">
-      <h3>📊 Statistics</h3>
-      <p>BS / MPhil level + SPSS & R guidance</p>
-    </div>
-  </div>
-</section>
+function login(){
+  const id = studentId.value.trim();
+  const name = username.value.trim();
+  const pass = password.value.trim();
 
-<section id="admission">
-  <h2>Online Admission</h2>
-  <p>Fill out the admission form to apply for enrollment.</p>
-  <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLScXHYMsfY7p8ul08etPse_jgVmM7NjxYFXNmp1iwnlKpan_Aw/viewform?usp=publish-editor" target="_blank">Apply Online</a>
-</section>
+  const student = admittedStudents.find(s =>
+    s.id === id &&
+    s.name.toLowerCase() === name.toLowerCase() &&
+    s.password === pass
+  );
 
-<section id="fee">
-  <h2>Fee & Scholarship</h2>
-  <p>
-    Affordable monthly fee plans are available.
-    Need-based fee discounts and scholarships are offered to deserving students.
-  </p>
-</section>
-
-<section>
-  <h2>Student Portal</h2>
-  <p>
-    🔐 Student login is available only after admission confirmation.
-    Login credentials are provided manually by the academy.
-  </p>
-  <a class="btn" href="login.html">Go to Student Login</a>
-</section>
-
-<footer>
-  <p>&copy; 2026 ASkhan Online Academy | Malakand</p>
-</footer>
+  if(student){
+    localStorage.setItem("studentData", JSON.stringify(student));
+    window.location.href="dashboard.html";
+  } else {
+    alert("Invalid credentials or not confirmed");
+  }
+}
+</script>
 
 </body>
 </html>
