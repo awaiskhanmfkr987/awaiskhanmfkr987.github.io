@@ -1,36 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard - ASkhan Online Academy</title>
+<title>Dashboard</title>
 <style>
-    body { font-family: Arial, sans-serif; background: #f0f2f5; margin:0; padding:0;}
-    header { background: #004aad; color: white; padding: 20px; text-align: center;}
-    .container { max-width: 600px; margin: 40px auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);}
-    a { color: #004aad; font-weight: bold; text-decoration: none;}
-    a:hover { text-decoration: underline;}
-    textarea { width: 100%; border-radius:5px; border:1px solid #ccc; padding:10px;}
-    button { background: #004aad; color:white; border:none; padding:10px 15px; border-radius:6px; cursor:pointer;}
-    button:hover { background:#002f7f;}
+body{font-family:Arial;background:#f0f2f5}
+.box{max-width:600px;margin:40px auto;background:#fff;padding:25px;border-radius:10px}
 </style>
 </head>
 <body>
 
-<header>
-    <h1>Student Dashboard</h1>
-</header>
+<div class="box">
+  <h2>Welcome <span id="name"></span></h2>
+  <p>ID: <span id="id"></span></p>
+  <p>Password: <span id="pass"></span></p>
 
-<div class="container">
-    <h2>Welcome, <span id="studentName"></span>!</h2>
-    <p>Your Student ID: <span id="studentID"></span></p>
-    <p>Your Password: <span id="studentPassword"></span></p>
+  <a id="notes" target="_blank">📄 Notes</a><br><br>
+  <a id="videos" target="_blank">🎥 Videos</a><br><br>
 
-    <h3>📘 Course Materials</h3>
-    <ul>
-        <li><a href="" id="notesLink" target="_blank">📄 Download Notes</a></li>
-        <li><a href="" id="videosLink" target="_blank">🎥 Watch Video Lectures</a></li>
-    </ul>
+  <button onclick="logout()">Logout</button>
+</div>
 
-    <h3>WhatsApp Message</h3>
-    <textarea id
+<script>
+const student = JSON.parse(localStorage.getItem("studentData"));
+
+if(!student){
+  window.location.href="login.html";
+}
+
+name.innerText = student.name;
+id.innerText = student.id;
+pass.innerText = student.password;
+notes.href = student.notes;
+videos.href = student.videos;
+
+function logout(){
+  localStorage.clear();
+  window.location.href="login.html";
+}
+</script>
+
+</body>
+</html>
